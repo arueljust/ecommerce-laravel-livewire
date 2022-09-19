@@ -1,0 +1,112 @@
+<div class="py-3 py-md-5">
+    <div class="container">
+        <h3>Cart List</h3>
+        <hr>
+        <br>
+        <div class="row">
+            <div class="col-md-12 shadow">
+                <div class="shopping-cart">
+
+                    <div class="cart-header d-none d-sm-none d-mb-block d-lg-block ">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h4>Produk</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Deskripsi</h4>
+                            </div>
+                            <div class="col-md-1">
+                                <h4>Harga</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Kuantitas</h4>
+                            </div>
+                            <div class="col-md-1">
+                                <h4>Total</h4>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <h4>Hapus</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    @forelse($cart as $cartItem)
+                    @if($cartItem->product)
+
+                    <div class="cart-item shadow">
+                        <div class="row">
+                            <div class="col-md-2 my-auto">
+                                <a href="{{url('category/'.$cartItem->product->category->slug.'/'.$cartItem->product->slug)}}">
+                                    <label class="product-name">
+
+                                        @if($cartItem->product->productImage)
+                                            <img src="{{url($cartItem->product->productImage[0]->image)}}" style="width: 50px; height: 50px" alt="">
+                                        {{$cartItem->product->name}}
+                                        @else
+                                             <img src="" style="width: 50px; height: 50px" alt="">
+                                        @endif
+
+                                    </label>
+                                </a>
+                            </div>
+                            <div class="col-md-4 my-auto">
+                                <label>{{$cartItem->product->small_description}}</label>
+                            </div>
+                            <div class="col-md-1 my-auto">
+                                <label class="price">Rp.{{number_format($cartItem->product->selling_price)}} </label>
+                            </div>
+                            <div class="col-md-2 col-7 my-auto ">
+                                <div class="quantity">
+                                    <div class="input-group">
+                                        <button type="button" wire:loading.attr="disabled" wire:click="decrementQuantity({{$cartItem->id}})" class="btn btn1 shadow"><i class="fa fa-minus"></i></button>
+                                        <input type="text" value="{{$cartItem->quantity}}" class="input-quantity" />
+                                        <button type="button" wire:loading.attr="disabled" wire:click="incrementQuantity({{$cartItem->id}})" class="btn btn1 shadow"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1 my-auto">
+                                <label class="price">Rp.{{number_format($cartItem->product->selling_price * $cartItem->quantity)}} </label>
+                                @php $totalPrice += $cartItem->product->selling_price * $cartItem->quantity @endphp
+                            </div>
+                            <div class="col-md-2 col-5 my-auto text-center">
+                                <div class="remove">
+                                    <button type="button" wire:loading.attr="disabled" wire:click="removeCartItem({{$cartItem->id}})" class="btn btn-danger btn-sm shadow">
+                                    <span wire:loading.remove wire:target="removeCartItem({{$cartItem->id}})">
+                                        <i class="fa fa-trash"></i> Hapus
+                                    </span>
+                                    <span wire:loading wire:target="removeCartItem({{$cartItem->id}})">
+                                        <i class="fa fa-trash"></i> Menghapus...
+                                    </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    @empty
+                    <h4 class="text-center">Tidak ada Produk di Cart</h4>
+                    @endforelse
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 my-md-auto mt-3">
+                <h5>
+                    Dapatkan Penawaran Menarik Lainnya  <a href="{{url('/category')}}">Belanja Sekarang</a>
+                </h5>
+            </div>
+            <div class="col-md-4 mt-3 shadow">
+                <div class="shadow-sm bg-white p-3">
+                        <h4>Total :
+                            <span class="float-end">Rp.{{number_format($totalPrice)}}</span>
+                        </h4>
+                        <hr>
+                        <a href="{{url('checkout')}}" class="btn btn-warning w-100 text-bold shadow">Check Out</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
