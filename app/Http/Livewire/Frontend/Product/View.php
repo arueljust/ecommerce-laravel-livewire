@@ -81,7 +81,7 @@ class View extends Component
                             ]);
                             $this->emit('CartAddedUpdated');
                             $this->dispatchBrowserEvent('message', [
-                                'text' => 'Berhasil ditambahkan ke cart',
+                                'text' => 'Ditambahkan ke cart',
                                 'type' => 'success',
                                 'status' => 200
                             ]);
