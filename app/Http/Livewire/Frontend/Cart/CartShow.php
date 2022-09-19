@@ -11,6 +11,7 @@ class CartShow extends Component
 
     public function incrementQuantity(int $cartId)
     {
+
         $cartData = Cart::where('id', $cartId)->where('user_id', auth()->user()->id)->first();
 
         if ($cartData) {
@@ -41,29 +42,31 @@ class CartShow extends Component
     {
 
         $cartData = Cart::where('id', $cartId)->where('user_id', auth()->user()->id)->first();
-
-        if ($cartData) {
-            if ($cartData->product->quantity < $cartData->quantity) {
+          
+        if ($cartData->quantity > 1) {
+            if ($cartData->product->quantity >= $cartData->quantity) {
                 $cartData->decrement('quantity');
                 $this->dispatchBrowserEvent('message', [
                     'text' => 'Kuantitas diubah',
                     'type' => 'success',
                     'status' => 200
                 ]);
+          
             } else {
                 $this->dispatchBrowserEvent('message', [
-                    'text' => 'Minimal pembelian 1 item',
-                    'type' => 'warning',
-                    'status' => 200
+                    'text' => 'Ada yang Salah',
+                    'type' => 'error',
+                    'status' => 500
                 ]);
             }
         } else {
             $this->dispatchBrowserEvent('message', [
-                'text' => 'Ada yang salah!',
-                'type' => 'error',
-                'status' => 404
+                'text' => 'Minimal pembelian 1 item',
+                'type' => 'warning',
+                'status' => 200
             ]);
         }
+    
     }
 
     public function removeCartItem(int $cartId)
