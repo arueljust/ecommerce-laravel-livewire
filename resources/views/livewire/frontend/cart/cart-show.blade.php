@@ -59,7 +59,7 @@
                                 <div class="quantity">
                                     <div class="input-group">
                                         <button type="button" wire:loading.attr="disabled" wire:click="decrementQuantity({{$cartItem->id}})" class="btn btn1 shadow"><i class="fa fa-minus"></i></button>
-                                        <input type="text" value="{{$cartItem->quantity}}" class="input-quantity" />
+                                        <input type="text" value="{{$cartItem->quantity}}" class="input-quantity" readonly/>
                                         <button type="button" wire:loading.attr="disabled" wire:click="incrementQuantity({{$cartItem->id}})" class="btn btn1 shadow"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
