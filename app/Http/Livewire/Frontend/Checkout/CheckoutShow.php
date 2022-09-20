@@ -7,12 +7,15 @@ use App\Models\Order;
 use App\Models\Orderitem;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Kavist\RajaOngkir\RajaOngkir;
 
 class CheckoutShow extends Component
 {
-
+    private $apiKey = '6cdfb2421be44202e93ae35bb6d8a54c';
+    public $provinsi_id, $kota_id, $jasa, $daftarProvinsi, $daftarKota,$nama_jasa;
+    public $result=[];
     public $cart, $totalProductAmount = 0;
-
+    public $orderItem,$weight;
     public $fullname, $nik, $Phone, $email, $pincode, $address, $payment_mode = NULL, $payment_id = NULL;
 
     public function rules()
@@ -71,7 +74,7 @@ class CheckoutShow extends Component
         $codOrder = $this->placeOrder();
         if ($codOrder) {
 
-            session()->flash('message','Pesanan berhasil dan sedang diproses');
+            session()->flash('message', 'Pesanan berhasil dan sedang diproses');
             // kosongkan cart jika checkout suksess
             Cart::where('user_id', auth()->user()->id)->delete();
             // hapus cart
@@ -94,18 +97,68 @@ class CheckoutShow extends Component
 
     public function totalAmount()
     {
+
+        $rajaOngkir = new RajaOngkir($this->apiKey);
+        $this->daftarProvinsi = $rajaOngkir->provinsi()->all();
+
+        if ($this->provinsi_id) {
+            $this->daftarKota = $rajaOngkir->kota()->dariprovinsi($this->provinsi_id)->get();
+        }
+
+
         $this->totalProductAmount = 0;
         $this->cart = Cart::where('user_id', auth()->user()->id)->get();
         foreach ($this->cart as $cartItem) {
             $this->totalProductAmount += $cartItem->product->selling_price * $cartItem->quantity;
         }
+        
+        
+
+        
+
         return $this->totalProductAmount;
     }
+
+    public function getOngkir()
+    {
+        // validasi input
+        if (!$this->provinsi_id || !$this->kota_id || !$this->jasa) {
+            return;
+        }
+
+        // ambil data produk
+        $this->cart = Cart::where('user_id', auth()->user()->id)->get();
+
+        // set biaya ongkir
+        $rajaOngkir = new RajaOngkir($this->apiKey);
+        $cost = $rajaOngkir->ongkosKirim([
+            'origin'        => 489,     // ID kota/kabupaten asal (tuban)
+            'destination'   => $this->kota_id,      // ID kota/kabupaten tujuan
+            'weight'        => 1000,    // berat barang dalam gram
+            'courier'       => $this->jasa    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+        ])->get();
+
+        // nama jasa buat sendiri
+        $this->nama_jasa =$cost['0']['name'];
+            
+        foreach($cost[0]['costs'] as $row)
+        {
+            $this->result[]=array(
+                'description'=>$row['description'],
+                'cost' => $row['cost'][0]['value'],
+                'etd' =>$row['cost'][0]['etd']
+            );
+        }
+        
+    }
+
+
 
     public function render()
     {
         $this->fullname = auth()->user()->name;
         $this->email = auth()->user()->email;
+
 
         $this->totalProductAmount = $this->totalAmount();
         return view('livewire.frontend.checkout.checkout-show', [

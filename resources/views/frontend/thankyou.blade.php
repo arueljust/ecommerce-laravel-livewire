@@ -13,7 +13,7 @@
                 @endif
                 <div class="p-4 shadow bg-white">
                     <h2>My Logo</h2>
-                    <h4>Terima Kasih Telah Berbelanja Di Zatoku</h4>
+                    <h4 class="">Terima Kasih Telah Berbelanja Di Zatoku</h4>
                     <h6 class="">Dapatkan Penawaran Menarik Lainnya</h6>
                     <a href="{{url('category')}}" class="btn btn-sm btn-primary shadow">Belanja Sekarang</a>
                 </div>

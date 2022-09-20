@@ -15,6 +15,7 @@ class Orderitem extends Model
     'order_id',
     'product_id',
     'quantity',
+    'weight',
     'price'
     ];
 }

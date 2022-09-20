@@ -6,9 +6,9 @@
         <h5 class="alert alert-success mb-2">{{session('message')}}</h5 class="alert alert-success mb-2">
         @endif
         <div class="card">
-            <div class="card-header">
+            <div class="card-header shadow">
                 <h4><U> Edit Product </U>
-                    <a href="{{url('admin/product')}}" class="btn btn-warning btn-sm float-end">Back</a>
+                    <a href="{{url('admin/product')}}" class="btn btn-warning btn-sm float-end shadow">Back</a>
                 </h4>
             </div>
             <div class="card-body">
@@ -24,7 +24,7 @@
                 <form action="{{url('admin/product/'.$product->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs shadow" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
                                 <h4>Home</h4>
@@ -52,10 +52,10 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade border p-3 show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"><br>
+                        <div class="tab-pane fade border p-3 show active shadow" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"><br>
                             <div class="mb-3">
                                 <label>Select Category</label>
-                                <select class="form-control" name="category_id">
+                                <select class="form-control shadow" name="category_id">
                                     @foreach ($category as $item)
                                     <option value="{{$item->id}}" {{$item->id==$product->category_id ? 'selected':''}}>
                                         {{$item->name}}
@@ -65,15 +65,15 @@
                             </div>
                             <div class="mb-3">
                                 <label>{product Name</label>
-                                <input type="text" name="name" value="{{$product->name}}" class="form-control" />
+                                <input type="text" name="name" value="{{$product->name}}" class="form-control shadow" />
                             </div>
                             <div class="mb-3">
                                 <label>{product Slug</label>
-                                <input type="text" name="slug" value="{{$product->slug}}" class="form-control" />
+                                <input type="text" name="slug" value="{{$product->slug}}" class="form-control shadow" />
                             </div>
                             <div class="mb-4">
                                 <label>Select Brand</label>
-                                <select class="form-control" name="brand">
+                                <select class="form-control shadow" name="brand">
                                     @foreach ($brand as $item)
                                     <option value="{{$item->name}}" {{$item->name==$product->brand ? 'selected':''}}>
                                         {{$item->name}}
@@ -83,25 +83,25 @@
                             </div>
                             <div class="mb-3">
                                 <label>{Small Description (500 Words)</label>
-                                <textarea name="small_description" rows="2" class="form-control">{{$product->small_description}}</textarea>
+                                <textarea name="small_description" rows="2" class="form-control shadow">{{$product->small_description}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label>Description</label>
-                                <textarea name="description" rows="2" class="form-control">{{$product->description}}</textarea>
+                                <textarea name="description" rows="2" class="form-control shadow">{{$product->description}}</textarea>
                             </div>
                         </div>
                         <div class="tab-pane fade border p-3" id="seotags-tab-pane" role="tabpanel" aria-labelledby="seotags-tab" tabindex="0"><br>
                             <div class="mb-3">
                                 <label>{Meta Title</label>
-                                <input type="text" name="meta_title" value="{{$product->meta_title}}" class="form-control" />
+                                <input type="text" name="meta_title" value="{{$product->meta_title}}" class="form-control shadow" />
                             </div>
                             <div class="mb-3">
                                 <label>{Meta Description</label>
-                                <textarea name="meta_description" rows="2" class="form-control">{{$product->meta_description}}</textarea>
+                                <textarea name="meta_description" rows="2" class="form-control shadow">{{$product->meta_description}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label>{Meta Keyword</label>
-                                <textarea name="meta_keyword" rows="2" class="form-control">{{$product->meta_keyword}}</textarea>
+                                <textarea name="meta_keyword" rows="2" class="form-control shadow">{{$product->meta_keyword}}</textarea>
                             </div>
                         </div>
                         <div class="tab-pane fade border p-3" id="detail-tab-pane" role="tabpanel" aria-labelledby="detail-tab" tabindex="0"><br>
@@ -109,19 +109,19 @@
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label>Original Price</label>
-                                        <input type="text" name="original_price" value="{{$product->original_price}}" class="form-control" />
+                                        <input type="text" name="original_price" value="{{$product->original_price}}" class="form-control shadow" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label>Selling Price</label>
-                                        <input type="text" name="selling_price" value="{{$product->selling_price}}" class="form-control" />
+                                        <input type="text" name="selling_price" value="{{$product->selling_price}}" class="form-control shadow" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label>Quantity</label>
-                                        <input type="number" name="quantity" value="{{$product->quantity}}" class="form-control" />
+                                        <input type="number" name="quantity" value="{{$product->quantity}}" class="form-control shadow" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -141,15 +141,15 @@
                         <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0"><br>
                             <div class="mb-3">
                                 <label>Upload Image Product</label>
-                                <input type="file" name="image[]" class="form-control" multiple />
+                                <input type="file" name="image[]" class="form-control shadow" multiple />
                             </div>
                             <div>
                                 @if($product->productImage)
                                 <div class="row">
                                     @foreach($product->productImage as $image)
                                     <div class="col-md-2">
-                                        <img src="{{asset($image->image)}}" style="width: 80px; height: 80px;" class="me-4 border" alt="Img" />
-                                        <a href="{{url('admin/product-image/'.$image->id.'/delete')}}" class="btn btn-danger btn-sm text-white">Remove</a>
+                                        <img src="{{url($image->image)}}" style="width: 80px; height: 80px;" class="me-4 border shadow" alt="Img" />
+                                        <a href="{{url('admin/product-image/'.$image->id.'/delete')}}" class="btn btn-danger btn-sm text-white shadow">Remove</a>
                                     </div>
                                     @endforeach
                                 </div>
@@ -204,7 +204,7 @@
                                             </td>
                                             <td>
                                                 <div class="input-group mb-3" style="width: 150px;">
-                                                    <input type="text" value="{{$prodColor->quantity}}" class="productColorQuantity form-control form-control-sm" />
+                                                    <input type="text" value="{{$prodColor->quantity}}" class="productColorQuantity form-control  form-control-sm" />
                                                     <button type="button" value="{{$prodColor->id}}" class="updateProductColorBtn btn btn-primary btn-sm text-white">Update</button>
                                                 </div>
                                             </td>

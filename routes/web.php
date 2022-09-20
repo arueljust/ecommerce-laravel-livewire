@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Livewire\Frontend\Ongkir\TambahOngkir;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,9 +38,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('wishlist',[WishlistController::class,'index']);
     Route::get('cart',[CartController::class,'index']);
     Route::get('checkout',[CheckOutController::class,'index']);
+    
 });
 
 Route::get('thank-you',[FrontEndController::class,'thankyou']);
+
 
 // Frontend Product Livewire
 Route::get('/product/{product_slug}',App\Http\Livewire\FrontEnd\Product\Index::class);
