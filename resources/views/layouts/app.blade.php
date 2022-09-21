@@ -47,6 +47,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script>
+        
         const Toast = Swal.mixin({
         toast: true,
         position: 'top-right',
@@ -59,15 +60,27 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     });
-
-    window.addEventListener('message',({detail:{type,text}})=>{
+        window.addEventListener('message',({detail:{type,text}})=>{
+    if(({detail:{type,text}})){     
         Toast.fire({
             icon:type,
             title:text
         })
+    }
     })
     </script>
+ 
+    <!-- <script>
+        window.addEventListener('message',event=>{
+            if(event.detail){
+                alertify.set('notifier','position','top-right');
+                alertify.notify(event.detail.text , event.detail.type);
+            }
+        });
+    </script> -->
+    
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>
