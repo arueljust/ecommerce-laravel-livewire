@@ -30,7 +30,7 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered" id="datatableCategory">
                         <thead class="shadow">
                             <tr class="text-center">
                                 <th>ID</th>

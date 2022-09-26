@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckoutShow extends Component
 {
-    
-    // private $apiKey = '6cdfb2421be44202e93ae35bb6d8a54c';
-    // public $provinsi_id, $kota_id, $jasa, $daftarProvinsi, $daftarKota, $nama_jasa;
-    // public $result = [];
-    public $cart, $totalProductAmount = 0;
+
+    private $apiKey = '6cdfb2421be44202e93ae35bb6d8a54c';
+    public $provinsi_id, $kota_id, $jasa, $daftarProvinsi, $daftarKota, $nama_jasa;
+    public $result = [];
+    public $cart, $totalProductAmount = 0,$totalCost=0;
     public $orderItem, $weight;
     public $fullname, $nik, $Phone, $email, $pincode, $address, $payment_mode = NULL, $payment_id = NULL;
-  
+
     // panggil validasi function dari blade file
     protected $listeners=[
         'validationForAll',
@@ -143,12 +143,12 @@ class CheckoutShow extends Component
     public function totalAmount()
     {
 
-        // $rajaOngkir = new RajaOngkir($this->apiKey);
-        // $this->daftarProvinsi = $rajaOngkir->provinsi()->all();
+        $rajaOngkir = new RajaOngkir($this->apiKey);
+        $this->daftarProvinsi = $rajaOngkir->provinsi()->all();
 
-        // if ($this->provinsi_id) {
-        //     $this->daftarKota = $rajaOngkir->kota()->dariprovinsi($this->provinsi_id)->get();
-        // }
+        if ($this->provinsi_id) {
+            $this->daftarKota = $rajaOngkir->kota()->dariprovinsi($this->provinsi_id)->get();
+        }
 
 
         $this->totalProductAmount = 0;
@@ -160,38 +160,48 @@ class CheckoutShow extends Component
         return $this->totalProductAmount;
     }
 
-    
 
-    // public function getOngkir()
-    // {
-    //     // validasi input
-    //     if (!$this->provinsi_id || !$this->kota_id || !$this->jasa) {
-    //         return;
-    //     }
 
-    //     // ambil data produk
-    //     $this->cart = Cart::where('user_id', auth()->user()->id)->get();
+    public function getOngkir()
+    {
+        // validasi input
+        if (!$this->provinsi_id || !$this->kota_id || !$this->jasa) {
+            return;
+        }
 
-    //     // set biaya ongkir
-    //     $rajaOngkir = new RajaOngkir($this->apiKey);
-    //     $cost = $rajaOngkir->ongkosKirim([
-    //         'origin'        => 489,     // ID kota/kabupaten asal (tuban)
-    //         'destination'   => $this->kota_id,      // ID kota/kabupaten tujuan
-    //         'weight'        => 1000,    // berat barang dalam gram
-    //         'courier'       => $this->jasa    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
-    //     ])->get();
+        // ambil data produk
+        $this->cart = Cart::where('user_id', auth()->user()->id)->get();
+        
 
-    //     // nama jasa buat sendiri
-    //     $this->nama_jasa = $cost['0']['name'];
+        // set biaya ongkir
+        $rajaOngkir = new RajaOngkir($this->apiKey);
+        $cost = $rajaOngkir->ongkosKirim([
+            'origin'        => 489,     // ID kota/kabupaten asal (tuban)
+            'destination'   => $this->kota_id,      // ID kota/kabupaten tujuan
+            'weight'        => 1000,    // berat barang dalam gram
+            'courier'       => $this->jasa    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+        ])->get();
+            
+        // nama jasa buat sendiri
+        $this->nama_jasa = $cost['0']['name'];
 
-    //     foreach ($cost[0]['costs'] as $row) {
-    //         $this->result[] = array(
-    //             'description' => $row['description'],
-    //             'cost' => $row['cost'][0]['value'],
-    //             'etd' => $row['cost'][0]['etd']
-    //         );
-    //     }
-    // }
+        foreach ($cost[0]['costs'] as $row) {
+            $this->result[] = array(
+                'description' => $row['description'],
+                'cost' => $row['cost'][0]['value'],
+                'etd' => $row['cost'][0]['etd']
+            );
+        }
+    }
+
+    public function save_ongkir($cost)
+    {
+       
+        $this->totalCost = $cost;
+
+        return $this->totalCost;
+
+    }
 
 
 
@@ -201,7 +211,7 @@ class CheckoutShow extends Component
         $this->email = auth()->user()->email;
         $this->totalProductAmount = $this->totalAmount();
         return view('livewire.frontend.checkout.checkout-show', [
-            'totalProductAmount' => $this->totalProductAmount
+            'totalProductAmount' => $this->totalProductAmount + $this->totalCost
         ]);
     }
 }

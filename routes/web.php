@@ -3,10 +3,12 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Livewire\Frontend\Ongkir\TambahOngkir;
@@ -38,7 +40,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('wishlist',[WishlistController::class,'index']);
     Route::get('cart',[CartController::class,'index']);
     Route::get('checkout',[CheckOutController::class,'index']);
-    
+    Route::get('order',[OrderController::class,'index']);
+    Route::get('order/{ordeId}',[OrderController::class,'show']);
+
 });
 
 Route::get('thank-you',[FrontEndController::class,'thankyou']);
@@ -97,6 +101,15 @@ Route::controller(ColorController::class)->group(function(){
     Route::get('/color/{color}','edit');
     Route::put('/color/{color_id}','update');
     Route::get('/color/{color_id}/delete','destroy');
+   });
+// Route Order/Transaction
+Route::controller(AdminOrderController::class)->group(function(){
+    Route::get('order','index');
+    Route::get('order/{orderId}','show');
+    Route::put('order/{orderId}','updateOrderStatus');
+    Route::get('invoice/{orderId}','viewInvoice');
+    Route::get('invoice/{orderId}/generate','downloadInvoice');
+
    });
 
 // Route Brand

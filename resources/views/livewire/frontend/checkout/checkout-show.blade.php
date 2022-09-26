@@ -40,15 +40,16 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label>Kode Pos</label>
-                                    <input type="number" wire:model.defer="pincode" id="pincode"  class="form-control shadow" placeholder="Masukkan kode pos" />
+                                    <input type="number" wire:model.defer="pincode" id="pincode" class="form-control shadow" placeholder="Masukkan kode pos" />
                                     @error('pincode') <small class="text-danger">{{$message}}</small> @enderror
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label>Alamat Lengkap</label>
-                                    <textarea wire:model.defer="address" id="address"  class="form-control shadow" rows="2"></textarea>
+                                    <textarea wire:model.defer="address" id="address" class="form-control shadow" rows="2"></textarea>
                                     @error('address') <small class="text-danger">{{$message}}</small> @enderror
                                 </div>
 
+                                
                                 <div class="shadow bg-white p-3">
                                     <h4 class="text-primary">
                                         Total Belanja :
@@ -61,8 +62,9 @@
                                     <label>Pilih Metode Pembayaran : </label>
                                     <div class="d-md-flex align-items-start">
                                         <div class="nav col-md-3 flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <button wire:loading.attr="disabled" class="nav-link active fw-bold" id="cashOnDeliveryTab-tab" data-bs-toggle="pill" data-bs-target="#cashOnDeliveryTab" type="button" role="tab" aria-controls="cashOnDeliveryTab" aria-selected="true">Cash on Delivery ( COD )</button>
-                                            <button wire:loading.attr="disabled" class="nav-link fw-bold" id="onlinePayment-tab" data-bs-toggle="pill" data-bs-target="#onlinePayment" type="button" role="tab" aria-controls="onlinePayment" aria-selected="false">Transfer Bank</button>
+                                            <button wire:loading.attr="disabled" class="nav-link active fw-bold shadow" id="cashOnDeliveryTab-tab" data-bs-toggle="pill" data-bs-target="#cashOnDeliveryTab" type="button" role="tab" aria-controls="cashOnDeliveryTab" aria-selected="true">Cash on Delivery ( COD )</button>
+                                            <button wire:loading.attr="disabled" class="nav-link fw-bold shadow" id="midTrans-tab" data-bs-toggle="pill" data-bs-target="#midTrans" type="button" role="tab" aria-controls="midTrans" aria-selected="false">Transfer Bank</button>
+                                            <button wire:loading.attr="disabled" class="nav-link fw-bold shadow" id="onlinePayment-tab" data-bs-toggle="pill" data-bs-target="#onlinePayment" type="button" role="tab" aria-controls="onlinePayment" aria-selected="false">Paypall</button>
                                         </div>
                                         <div class="tab-content col-md-9" id="v-pills-tabContent">
                                             <div class="tab-pane active show fade" id="cashOnDeliveryTab" role="tabpanel" aria-labelledby="cashOnDeliveryTab-tab" tabindex="0">
@@ -78,14 +80,15 @@
                                                 </button>
 
                                             </div>
-                                            <div class="tab-pane fade" id="onlinePayment" role="tabpanel" aria-labelledby="onlinePayment-tab" tabindex="0">
-                                                <!-- <button class="btn btn-primary col-md-12  shadow">Midtrans Transfer</button> -->
+                                            <div class="tab-pane fade" id="midTrans" role="tabpanel" aria-labelledby="midTrans-tab" tabindex="0">
+                                                <h6>Transfer Online (Bank / Alfamaret / Indomaret)</h6>
                                                 <hr />
-                                                <!-- <button id="tf" type="button" wire:loading.attr="disabled" class="btn btn-warning shadow">Bayar sekarang (Transfer bank)</button> -->
+                                                <button id="tf" type="button" wire:loading.attr="disabled" class="btn btn-warning shadow">Bayar sekarang</button>
+                                            </div>
+                                            <div class="tab-pane fade" id="onlinePayment" role="tabpanel" aria-labelledby="onlinePayment-tab" tabindex="0">
                                                 <div>
                                                     <div id="paypal-button-container"></div>
                                                 </div>
-
                                             </div>
 
                                         </div>
@@ -116,17 +119,16 @@
     paypal.Buttons({
         onClick: function() {
             // Validasi Untuk Online Payment/transfer
-            if (!document.getElementById('fullname').value
-                || !document.getElementById('email').value
-                || !document.getElementById('nik').value
-                || !document.getElementById('Phone').value
-                || !document.getElementById('pincode').value
-                || !document.getElementById('address').value
-            )
-            {
+            if (!document.getElementById('fullname').value ||
+                !document.getElementById('email').value ||
+                !document.getElementById('nik').value ||
+                !document.getElementById('Phone').value ||
+                !document.getElementById('pincode').value ||
+                !document.getElementById('address').value
+            ) {
                 Livewire.emit('validationForAll');
                 return false;
-            }else{
+            } else {
                 @this.set('fullname', document.getElementById('fullname').value);
                 @this.set('email', document.getElementById('email').value);
                 @this.set('nik', document.getElementById('nik').value);
@@ -151,13 +153,13 @@
                 // Successful capture! For dev/demo purposes
                 console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                 const transaction = orderData.purchase_units[0].payments.captures[0];
-                if(transaction.status == "COMPLETED"){
-                    Livewire.emit('transactionEmit', transaction.id );
+                if (transaction.status == "COMPLETED") {
+                    Livewire.emit('transactionEmit', transaction.id);
                 }
                 // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-               
+
             });
-       }
+        }
     }).render('#paypal-button-container');
 </script>
 @endpush

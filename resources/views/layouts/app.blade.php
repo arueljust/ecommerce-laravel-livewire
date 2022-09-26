@@ -16,7 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Style -->
@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <!-- CSS -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+
     <!-- Default theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
     <!-- Scripts -->
@@ -41,44 +42,45 @@
         </main>
     </div>
     <!-- Script -->
-
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script>
-        
         const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-right',
-        showConfirmButton: false,
-        showCloseButton: true,
-        timer: 5000,
-        timerProgressBar:true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    });
-        window.addEventListener('message',({detail:{type,text}})=>{
-    if(({detail:{type,text}})){     
-        Toast.fire({
-            icon:type,
-            title:text
-        })
-    }
-    })
-    </script>
- 
-    <!-- <script>
-        window.addEventListener('message',event=>{
-            if(event.detail){
-                alertify.set('notifier','position','top-right');
-                alertify.notify(event.detail.text , event.detail.type);
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            showCloseButton: true,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         });
-    </script> -->
-    
+        window.addEventListener('message', ({
+            detail: {
+                type,
+                text
+            }
+        }) => {
+            if (({
+                    detail: {
+                        type,
+                        text
+                    }
+                })) {
+                Toast.fire({
+                    icon: type,
+                    title: text
+                })
+            }
+        })
+    </script>
+
     @livewireScripts
     @stack('scripts')
 </body>

@@ -7,6 +7,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ url('admin/order')}}" class="nav-link">
+                <i class="mdi mdi-sale menu-icon"></i>
+                <span class="menu-title">  Order / Transaction </span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="mdi mdi-circle-outline menu-icon"></i>
               <span class="menu-title">Category</span>
