@@ -127,13 +127,13 @@
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label>Trending</label>
-                                        <input type="checkbox" name="tranding" value="{{$product->tranding=='1' ? 'checked':''}}" style="width: 15px; height: 15px;" />
+                                        <input type="checkbox" name="trending" {{$product->trending == '1' ? 'checked':'' }} style="width: 15px; height: 15px;" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label>Status</label>
-                                        <input type="checkbox" name="status" value="{{$product->status=='1' ? 'checked':''}}" style="width: 15px; height: 15px;" />
+                                        <input type="checkbox" name="status" {{$product->status == '1' ? 'checked':'' }} style="width: 15px; height: 15px;" />
                                     </div>
                                 </div>
                             </div>

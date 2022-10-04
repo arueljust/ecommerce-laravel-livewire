@@ -8,11 +8,26 @@
             @endif
             <div class="row">
                 <div class="col-md-5 mt-3">
-                    <div class="bg-white border shadow">
+                    <div class="bg-white border shadow" wire:ignore>
                         @if($product->productImage)
-                        <img src="{{asset($product->productImage[0]->image)}}" class="w-100" alt="Img">
+                        <!-- <img src="{{asset($product->productImage[0]->image)}}" class="w-100" alt="Img"> -->
+                        <div class="exzoom" id="exzoom">
+                            <div class="exzoom_img_box">
+                                <ul class='exzoom_img_ul'>
+                                    @foreach($product->productImage as $prodImg)
+                                    <li><img src="{{ asset($prodImg->image) }}" /></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="exzoom_nav"></div>
+                            <!-- Nav Buttons -->
+                            <p class="exzoom_btn">
+                                <a href="javascript:void(0);" class="exzoom_prev_btn shadow"> < </a>
+                                <a href="javascript:void(0);" class="exzoom_next_btn shadow"> > </a>
+                            </p>
+                        </div>
                         @else
-                        <h4>No Image Added</h4>
+                        <h4>Tidak Ada Gambar</h4>
                         @endif
                     </div>
                 </div>
@@ -74,10 +89,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 mt-3 shadow">
+                <div class="col-md-12 mt-3 ">
                     <div class="card">
                         <div class="card-header bg-white">
-                            <h4>Deskripsi Produk</h4>
+                            <h4>Deskripsi</h4>
                         </div>
                         <div class="card-body">
                             <p>
@@ -90,3 +105,22 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    $(function() {
+
+        $("#exzoom").exzoom({
+            "navWidth": 70,
+            "navHeight": 70,
+            "navItemNum": 5,
+            "navItemMargin": 7,
+            "navBorder": 2,
+            "autoPlay": false,
+            "autoPlayTimeout": 2000
+
+        });
+
+    });
+</script>
+@endpush

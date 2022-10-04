@@ -118,7 +118,7 @@
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label>Trending</label>
-                                        <input type="checkbox" class="shadow" name="tranding" style="width: 15px; height: 15px;" />
+                                        <input type="checkbox" class="shadow" name="trending" style="width: 15px; height: 15px;" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">

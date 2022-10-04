@@ -50,14 +50,14 @@
                                 <i class="fa fa-user"></i> {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " href="#"><i class="fa fa-user shadow"></i> Profile</a></li>
-                                <li><a class="dropdown-item " href="#"><i class="fa fa-list shadow"></i> Orders</a></li>
-                                <li><a class="dropdown-item " href="{{url('wishlist')}}"><i class="fa fa-heart shadow"></i> Wishlist </a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart shadow"></i> Cart </a></li>
+                                <li><a class="dropdown-item " href="#"><i class="fa fa-user"></i> Profile</a></li>
+                                <li><a class="dropdown-item " href="{{ url('order') }}"><i class="fa fa-list"></i> Orders</a></li>
+                                <li><a class="dropdown-item " href="{{url('wishlist')}}"><i class="fa fa-heart"></i> Wishlist </a></li>
+                                <li><a class="dropdown-item" href="{{ url('cart')}}"><i class="fa fa-shopping-cart"></i> Cart </a></li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out shadow"></i> {{ __('Keluar') }}
+                                        <i class="fa fa-sign-out"></i> {{ __('Keluar') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
