@@ -8,8 +8,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="mb-4">Kategori</h4>
-                <hr>
+                <h4>Kategori</h4>
+                <div class="underline mb-4"></div>
             </div>
             @forelse($category as $item)
             <div class="col-6 col-md-3 shadow">

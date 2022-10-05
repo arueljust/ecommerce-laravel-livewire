@@ -123,6 +123,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
+                                        <label>Featured</label>
+                                        <input type="checkbox" class="shadow" name="featured" style="width: 15px; height: 15px;" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
                                         <label>Status</label>
                                         <input type="checkbox" class="shadow" name="status" style="width: 15px; height: 15px;" />
                                     </div>

@@ -22,6 +22,9 @@
     <!-- Style -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+
+
 
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css') }}">
@@ -48,8 +51,11 @@
         <main>
             @yield('content')
         </main>
+
+        @include('layouts.include.frontend.footer')
     </div>
     <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>

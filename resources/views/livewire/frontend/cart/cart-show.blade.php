@@ -1,8 +1,7 @@
 <div class="py-3 py-md-5">
     <div class="container">
         <h3>Cart List</h3>
-        <hr>
-        <br>
+        <div class="underline mb-4"></div>
         <div class="row">
             <div class="col-md-12 shadow">
                 <div class="shopping-cart">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
@@ -35,6 +36,8 @@ Route::get('/','index');
 Route::get('/category','category');
 Route::get('/category/{category_slug}','product');
 Route::get('/category/{category_slug}/{product_slug}','productView');
+Route::get('/new-arrival','newArrival');
+Route::get('/featured-product','featuredProduct');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('wishlist',[WishlistController::class,'index']);
@@ -61,6 +64,7 @@ Auth::routes();
 // admin Route
 Route::prefix('admin')->middleware('auth','isAdmin')->group(function(){
     Route::get('dashboard',[DashboardController::class,'index']);
+    Route::get('setting',[SettingController::class,'index']);
 // Route Slider
 Route::controller(SliderController::class)->group(function(){
     Route::get('slider','index');

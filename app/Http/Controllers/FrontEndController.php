@@ -15,9 +15,22 @@ class FrontEndController extends Controller
     {
         $slider=Slider::where('status','0')->get();
         $trendingProduct=Product::where('trending','1')->latest()->take(10)->get();
-        return view('frontend.index',compact('slider','trendingProduct'));
+        $newArrival=Product::latest()->take(10)->get();
+        $featuredProduct=Product::where('featured','1')->latest()->take(10)->get();
+        return view('frontend.index',compact('slider','trendingProduct','newArrival','featuredProduct'));
     }
 
+    public function newArrival()
+    {
+        $newArrival=Product::latest()->take(10)->get();
+        return view('frontend.pages.newArrival',compact('newArrival'));
+    }
+
+    public function featuredProduct()
+    {
+        $featuredProduct=Product::where('featured','1')->latest()->get();
+        return view('frontend.pages.featuredProduct',compact('featuredProduct'));
+    }
 
     public function category()
     {

@@ -4,8 +4,10 @@
 
 @section('content')
 
-<div class="py-3 pyt-md-4">
-    <div class="container">
+<div class="py-3 pyt-md-4 mt-4">
+    <br>
+    <br>
+    <div class="container mt-4">
         <div class="row">
             <div class="col-md-12 text-center">
                 @if(session('message'))

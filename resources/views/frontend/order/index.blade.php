@@ -9,7 +9,8 @@
         <div class="row">
             <div class="com-md-12">
                 <div class="shadow bg-white p-3">
-                    <h4 class="mb-4">List Order</h4>
+                    <h4>List Order</h4>
+                    <div class="underline mb-4"></div>
                     <hr>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped shadow" id="orderList">

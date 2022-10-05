@@ -109,7 +109,7 @@
         <thead>
             <tr>
                 <th width="50%" colspan="2">
-                    <h2 class="text-start">Zatoku</h2>
+                    <h2 class="text-start"><b>Zato</b>Ku</h2>
                 </th>
                 <th width="50%" colspan="2" class="text-end company-data">
                     <span>Invoice Id: # {{ $order->id }}</span> <br>

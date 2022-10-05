@@ -2,10 +2,11 @@
                         <div class="py-3 py-md-5 bg-light">
                             <div class="container">
                                 <h3>WishList</h3>
+                                <div class="underline mb-4"></div>
                                 <hr>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-12 shadow">
+                                    <div class="col-md-12 shadow mt-4">
                                         <div class="shopping-cart">
 
                                             <div class="cart-header d-none d-sm-none d-mb-block d-lg-block">

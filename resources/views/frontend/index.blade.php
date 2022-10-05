@@ -38,7 +38,7 @@
     </button>
 </div>
 
-<div class="py-5 bg-white">
+<div class="py-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
@@ -56,12 +56,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4>Produk Trending</h4>
+                <h4>Produk Trending
+                    <a href="{{ url('/category') }}" class="btn btn-sm btn-outline-warning float-end">View More</a>
+                </h4>
                 <div class="underline mb-4"></div>
             </div>
             @if($trendingProduct)
             <div class="col-md-12">
-                <div class="owl-carousel owl-theme trending-product">
+                <div class="owl-carousel owl-theme four-carousel">
 
                     @foreach($trendingProduct as $item)
                     <div class="item">
@@ -85,6 +87,119 @@
                                     <span class="selling-price">Rp.{{number_format("$item->selling_price");}}</span>
                                     <span class="original-price">Rp.{{number_format("$item->original_price");}}</span>
                                 </div>
+                                <div class="mt-2">
+                                    <a href="#" class="d-block btn btn-sm btn-warning"> <i class="fa fa-shopping-cart text-dark"></i> <b>Beli Sekarang</b></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @else
+            <div class="col-md-12">
+                <div class="p-2">
+                    <h4 class="text-center">No Product Available</h4>
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Produk Baru
+                    <a href="{{ url('/new-arrival') }}" class="btn btn-sm btn-outline-warning float-end">View More</a>
+                </h4>
+                <div class="underline mb-4"></div>
+            </div>
+            @if($newArrival)
+            <div class="col-md-12">
+                <div class="owl-carousel owl-theme four-carousel">
+
+                    @foreach($newArrival as $item)
+                    <div class="item">
+                        <div class="product-card">
+                            <div class="product-card-img">
+                                <label class="stock bg-danger"> Baru </label>
+                                @if($item->productImage->count() > 0)
+                                <a href="{{url('/category/'.$item->category->slug.'/'.$item->slug)}}">
+                                    <img src="{{asset($item->productImage[0]->image)}}" alt="{{$item->name}}">
+                                </a>
+                                @endif
+                            </div>
+                            <div class="product-card-body">
+                                <p class="product-brand">{{$item->brand}}</p>
+                                <h5 class="product-name">
+                                    <a href="{{url('/category/'.$item->category->slug.'/'.$item->slug)}}">
+                                        {{$item->name}}
+                                    </a>
+                                </h5>
+                                <div>
+                                    <span class="selling-price">Rp.{{number_format("$item->selling_price");}}</span>
+                                    <span class="original-price">Rp.{{number_format("$item->original_price");}}</span>
+                                </div>
+                                <div class="mt-2">
+                                    <a href="#" class="d-block btn btn-sm btn-warning"> <i class="fa fa-shopping-cart text-dark"></i> <b>Beli Sekarang</b></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @else
+            <div class="col-md-12">
+                <div class="p-2">
+                    <h4 class="text-center">No Product Available</h4>
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
+
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Produk Unggulan
+                    <a href="{{ url('/featured-product') }}" class="btn btn-sm btn-outline-warning  float-end">View More</a>
+                </h4>
+                <div class="underline mb-4"></div>
+            </div>
+            @if($featuredProduct)
+            <div class="col-md-12">
+                <div class="owl-carousel owl-theme four-carousel">
+
+                    @foreach($featuredProduct as $item)
+                    <div class="item">
+                        <div class="product-card">
+                            <div class="product-card-img">
+                                <label class="stock bg-danger"> Baru </label>
+                                @if($item->productImage->count() > 0)
+                                <a href="{{url('/category/'.$item->category->slug.'/'.$item->slug)}}">
+                                    <img src="{{asset($item->productImage[0]->image)}}" alt="{{$item->name}}">
+                                </a>
+                                @endif
+                            </div>
+                            <div class="product-card-body">
+                                <p class="product-brand">{{$item->brand}}</p>
+                                <h5 class="product-name">
+                                    <a href="{{url('/category/'.$item->category->slug.'/'.$item->slug)}}">
+                                        {{$item->name}}
+                                    </a>
+                                </h5>
+                                <div>
+                                    <span class="selling-price">Rp.{{number_format("$item->selling_price");}}</span>
+                                    <span class="original-price">Rp.{{number_format("$item->original_price");}}</span>
+                                </div>
+                                <div class="mt-2">
+                                    <a href="#" class="d-block btn btn-sm btn-warning"> <i class="fa fa-shopping-cart text-dark"></i> <b>Beli Sekarang</b></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,10 +221,11 @@
 
 @section('script')
 <script>
-    $('.trending-product').owlCarousel({
+    $('.four-carousel').owlCarousel({
         loop: true,
         margin: 10,
-        nav: true,
+        dots: true,
+        nav: false,
         responsive: {
             // tampilan item yg ada di hp
             0: {

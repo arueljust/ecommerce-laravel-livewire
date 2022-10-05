@@ -111,14 +111,15 @@
     $(function() {
 
         $("#exzoom").exzoom({
-            "navWidth": 70,
-            "navHeight": 70,
+            "navWidth": 50,
+            "navHeight": 50,
             "navItemNum": 5,
             "navItemMargin": 7,
             "navBorder": 2,
             "autoPlay": false,
-            "autoPlayTimeout": 2000
-
+            "autoPlayTimeout": 2000,
+            responsive: 0,
+        
         });
 
     });

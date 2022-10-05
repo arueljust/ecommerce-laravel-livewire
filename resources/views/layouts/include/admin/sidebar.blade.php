@@ -68,5 +68,11 @@
               <span class="menu-title">User</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('setting') }}">
+              <i class="mdi mdi-settings menu-icon"></i>
+              <span class="menu-title">Settings</span>
+            </a>
+          </li>
         </ul>
       </nav>

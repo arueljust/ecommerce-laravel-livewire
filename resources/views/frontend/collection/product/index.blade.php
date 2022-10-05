@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h4 class="mb-4"> Produk Kami </h4>
-                <hr>
+                <div class="underline mb-4"></div>
             </div>
 
             <livewire:frontend.product.index  :category="$category"/>
